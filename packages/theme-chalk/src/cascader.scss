@@ -91,30 +91,31 @@
 
 @include b(cascader-menus) {
   white-space: nowrap;
-  background: #fff;
+  background: rgba(255, 255, 255, 0);
   position: absolute;
   margin: 5px 0;
   z-index: #{$--index-normal + 1};
-  border: $--select-dropdown-border;
+  border: 0;
   border-radius: $--border-radius-small;
-  box-shadow: $--select-dropdown-shadow;
+  box-shadow: rgba(0, 0, 0, 0) 0px 2px 12px 0px;
 }
 
 @include b(cascader-menu) {
   display: inline-block;
   vertical-align: top;
-  height: 204px;
+  height: auto;
+  max-height: 600px;
   overflow: auto;
-  border-right: $--select-dropdown-border;
+  border: $--select-dropdown-border;
   background-color: $--select-dropdown-background;
   box-sizing: border-box;
   margin: 0;
   padding: 6px 0;
   min-width: 160px;
 
-  &:last-child {
-    border-right: 0;
-  }
+  // &:last-child {
+  //   border-right: 0;
+  // }
 
   @include e(item) {
     font-size: $--select-font-size;

@@ -1,6 +1,7 @@
 const path = require('path');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = require('./config');
 
@@ -52,7 +53,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
+        // loaders: ['style-loader', 'css-loader'],
+        // plugins: [new ExtractTextPlugin('css/[element-ui].css')]
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
@@ -66,6 +72,7 @@ module.exports = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new ExtractTextPlugin('./Mycss.css')
   ]
 };

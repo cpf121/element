@@ -118,11 +118,13 @@
         const len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
-        if (this.changeOnSelect) {
-          this.$emit('pick', this.activeValue.slice(), false);
-        } else {
+        if (!this.changeOnSelect) {
           this.$emit('activeItemChange', this.activeValue);
         }
+        // if (this.changeOnSelect) {
+        //   this.$emit('pick', this.activeValue.slice(), false);
+        // } else {
+        // }
       },
       scrollMenu(menu) {
         scrollIntoView(menu, menu.getElementsByClassName('is-active')[0]);
@@ -242,6 +244,7 @@
               if (triggerEvent === 'mouseenter' && this.changeOnSelect) {
                 events.on.click = () => {
                   if (this.activeValue.indexOf(item.value) !== -1) {
+                    this.$emit('pick', this.activeValue.slice(), false);
                     this.$emit('closeInside', true);
                   }
                 };
@@ -354,6 +357,14 @@
           }
         });
       }
+      const leaveDivEvent = {
+        on: {
+        }
+      };
+      const leaveDivHandle = () =>{
+        this.$emit('closeInside');
+      };
+      leaveDivEvent.on.mouseleave = leaveDivHandle;
 
       return (
         <transition name="el-zoom-in-top" on-before-enter={this.handleMenuEnter} on-after-leave={this.handleMenuLeave}>
@@ -363,6 +374,7 @@
               'el-cascader-menus el-popper',
               popperClass
             ]}
+            {...leaveDivEvent}
             ref="wrapper"
           >
             <div x-arrow class="popper__arrow"></div>

@@ -61,7 +61,10 @@
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "install": "^0.12.2",
     "normalize-wheel": "^1.0.1",
+    "npm": "^6.9.0",
     "resize-observer-polyfill": "^1.5.0",
     "throttle-debounce": "^1.0.1"
   },
